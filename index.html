@@ -43,7 +43,7 @@
     <script>
         async function fetchUpdate() {
             try {
-                let response = await fetch('https://iamnicksangryintestine.github.io/feb2025/update.json');  // Hardcoded value
+                let response = await fetch('https://iamnicksangryintestine.github.io/update.json');  // Hardcoded value
                 let data = await response.json();
                 document.getElementById('status').textContent = data.status;
                 document.getElementById('timestamp').textContent = "Last updated: " + data.timestamp;
