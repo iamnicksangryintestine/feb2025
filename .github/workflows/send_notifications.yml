@@ -1,0 +1,28 @@
+name: Send Notification on Update
+
+on:
+  push:
+    paths:
+      - 'update.json'  # Runs only when update.json is updated
+
+jobs:
+  send_notification:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install requests pytz
+
+      - name: Run Notification Script
+        env:
+          ONESIGNAL_API_KEY: ${{ secrets.ONESIGNAL_API_KEY }}
+          ONESIGNAL_APP_ID: ${{ secrets.ONESIGNAL_APP_ID }}
+          WEBPAGE_URL: ${{ secrets.WEBPAGE_URL }}
+        run: python send_notification.py
