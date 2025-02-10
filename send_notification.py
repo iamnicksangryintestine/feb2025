@@ -9,6 +9,9 @@ ONESIGNAL_APP_ID = os.getenv("ONESIGNAL_APP_ID")
 ONESIGNAL_API_KEY = os.getenv("ONESIGNAL_API_KEY")
 GITHUB_UPDATE_URL = os.getenv("WEBPAGE_URL")  # URL to update.json
 
+print(f"Using OneSignal App ID: {ONESIGNAL_APP_ID}")
+
+
 # Timezone settings
 utc = pytz.utc
 est = pytz.timezone("America/New_York")
