@@ -11,7 +11,7 @@
         window.OneSignal = window.OneSignal || [];
         OneSignal.push(function() {
             OneSignal.init({
-                appId: "${{ secrets.ONESIGNAL_APP_ID }}",  // Using GitHub Secret for OneSignal App ID
+                appId: "5440d086-1357-4205-a230-6db9e4764426",  // Replace manually with your actual App ID
                 notifyButton: {
                     enable: true  // Adds a notification opt-in button
                 },
@@ -43,7 +43,7 @@
     <script>
         async function fetchUpdate() {
             try {
-                let response = await fetch('${{ secrets.WEBPAGE_URL }}');  // Using GitHub Secret for Webpage URL
+                let response = await fetch('https://iamnicksangryintestine.github.io/feb2025/update.json');  // Hardcoded value
                 let data = await response.json();
                 document.getElementById('status').textContent = data.status;
                 document.getElementById('timestamp').textContent = "Last updated: " + data.timestamp;
