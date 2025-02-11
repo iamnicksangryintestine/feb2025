@@ -3,57 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Surgery Updates</title>
-    
-    <!-- OneSignal Web Push SDK -->
-    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
-    <script>
-        window.OneSignal = window.OneSignal || [];
-        OneSignal.push(function() {
-            OneSignal.init({
-                appId: "5440d086-1357-4205-a230-6db9e4764426",  // Replace manually with your actual App ID
-                notifyButton: {
-                    enable: true  // Adds a notification opt-in button
-                },
-                allowLocalhostAsSecureOrigin: true
-            });
-
-            // Auto-prompt users when they visit the site
-            OneSignal.push(function() {
-                OneSignal.showNativePrompt();
-            });
-        });
-    </script>
-
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
-        .update-container { max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; }
-        h1 { color: #333; }
-        .timestamp { color: gray; font-size: 0.9em; }
-    </style>
+    <title>I am Nick's Angry Intestine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-
-    <h1>Surgery Updates</h1>
-    <div class="update-container">
-        <h2 id="status">Loading latest update...</h2>
-        <p id="timestamp" class="timestamp"></p>
+<body class="bg-gray-100 p-4">
+    <div class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-lg">
+        <h1 class="text-xl font-bold mb-4 text-center">I am Nick's Angry Intestine</h1>
+        <div id="timeline" class="space-y-4">
+            <!-- Entries will be inserted here -->
+        </div>
     </div>
 
     <script>
-        async function fetchUpdate() {
-            try {
-                let response = await fetch('https://iamnicksangryintestine.github.io/update.json');  // Hardcoded value
-                let data = await response.json();
-                document.getElementById('status').textContent = data.status;
-                document.getElementById('timestamp').textContent = "Last updated: " + data.timestamp;
-            } catch (error) {
-                document.getElementById('status').textContent = "Unable to load updates.";
-            }
+        if (!window.entries) {
+            window.entries = [
+                { date: "2025-02-10", time: "14:30", timezone: "EST", content: "Surgery Start 8:30a Eastern\nEstimated Duration 7.5h\nThank you for all for the support and love!" }
+            ];
         }
-        fetchUpdate();
-        setInterval(fetchUpdate, 60000); // Refresh every minute
-    </script>
 
+        function formatTime(time) {
+            let [hours, minutes] = time.split(":");
+            hours = parseInt(hours, 10);
+            const suffix = hours >= 12 ? "PM" : "AM";
+            hours = hours % 12 || 12;
+            return `${hours}:${minutes} ${suffix}`;
+        }
+
+        const timeline = document.getElementById("timeline");
+        window.entries.forEach(entry => {
+            const entryDiv = document.createElement("div");
+            entryDiv.classList.add("bg-blue-50", "p-4", "rounded-lg", "shadow", "border-l-4", "border-blue-500");
+            entryDiv.innerHTML = `
+                <p class="text-lg font-semibold">
+                    ${entry.date} - ${formatTime(entry.time)} <span class="text-sm text-gray-500">(${entry.timezone})</span>
+                </p>
+                <p class="text-gray-600 mt-2">${entry.content.replace(/\n/g, '<br>')}</p>
+            `;
+            timeline.appendChild(entryDiv);
+        });
+    </script>
 </body>
 </html>
+
+
